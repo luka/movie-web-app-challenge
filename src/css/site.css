@@ -5,6 +5,7 @@ body {
   font-weight: var(--baseFontWeight);
   scroll-behavior: var(--scroll-behavior);
   color: var(--colorBlack);
+  padding-bottom: var(--sp5);
 }
 
 @media screen and (min-width: 769px) {
@@ -85,4 +86,36 @@ p {
   height: var(--iconHeight);
   /* fill: currentColor; */
   flex-shrink: 0;
+}
+
+.spinner-icon {
+  animation: rotate 2s linear infinite;
+  height: 50px;
+}
+
+.spinner-icon .path {
+  stroke: var(--colorBlue);
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
 }
