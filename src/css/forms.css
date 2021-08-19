@@ -1,0 +1,128 @@
+/* forms */
+
+.form {
+  max-width: 500px;
+  margin-top: var(--sp4);
+  --sizePadding: var(--sp3);
+}
+
+.form-field {
+  margin-top: var(--sp4);
+}
+
+.form-field > *:not(.exception),
+.form-field div > input:not(.exception) {
+  width: 100%;
+}
+
+/* errors */
+.form-field .validation-error {
+  display: block;
+  margin-top: var(--sp1);
+  font-size: var(--f7);
+  color: var(--colorError);
+  padding-left: var(--sp2);
+}
+
+.form-field .invalid {
+  border: 1px solid var(--colorError) !important;
+  border-radius: 6px;
+}
+
+.form-field label.invalid,
+.form-field div.invalid {
+  padding: var(--sp2);
+}
+
+/* text input */
+
+::placeholder {
+  color: var(--colorLightGray);
+}
+
+.form-field label,
+.field-label,
+.label {
+  font-size: var(--f5);
+  /* text-transform: lowercase; */
+  color: var(--colorGray);
+}
+
+.form-field label::first-letter,
+.field-label::first-letter,
+.label::first-letter {
+  text-transform: capitalize;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-family: var(--fontFamily);
+  font-size: var(--f5);
+  margin-top: var(--sp2);
+  /* color: var(--colorLoghtGray); */
+}
+
+.form-field input[type="text"],
+.form-field input[type="date"],
+.form-field input[type="time"],
+.form-field input[type="number"],
+.form-field input[type="password"],
+.form-field textarea {
+  display: block;
+  padding: var(--sizePadding);
+  border: 1px solid var(--colorLightGray);
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+.form-field input[disabled] + * {
+  color: var(--colorLightGray);
+}
+
+/* select */
+
+.form-field select {
+  display: block;
+  padding: var(--sizePadding);
+  border: 1px solid var(--colorGray);
+  border-radius: 6px;
+}
+
+/* checkbox/radio */
+
+.form-field label > input + span {
+  text-transform: none;
+  font-variant: normal;
+  color: var(--colorBlack80);
+  margin-left: var(--sp2);
+  line-height: var(--compactLineHeight);
+}
+
+.form-field input[type="radio"] {
+  margin: 0;
+}
+
+.form-field input[type="checkbox"] {
+  margin: 1px 0 0 0;
+}
+
+/* disabled */
+.form-field input:disabled,
+.form-field select:disabled {
+  opacity: 0.4;
+}
+
+/* compact form */
+.form.compact {
+  --sizePadding: var(--sp2);
+}
+
+.form.compact *:not(button) {
+  --sizePadding: var(--sp2);
+  font-size: small;
+}
+
+.form.compact .form-field {
+  margin-top: var(--sp3);
+}

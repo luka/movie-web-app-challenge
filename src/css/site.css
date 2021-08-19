@@ -1,0 +1,88 @@
+html,
+body {
+  font-size: var(--baseFontSizeSmall);
+  line-height: var(--baseLineHeightSmall);
+  font-weight: var(--baseFontWeight);
+  scroll-behavior: var(--scroll-behavior);
+  color: var(--colorBlack);
+}
+
+@media screen and (min-width: 769px) {
+  html,
+  body {
+    font-size: var(--baseFontSize);
+  }
+}
+
+body {
+  font-family: var(--fontFamily);
+  margin: 0; /* Remove the tiny space around the edge of the page */
+  padding: 0;
+}
+
+h1 {
+  font-size: var(--f2);
+}
+
+h2 {
+  font-size: var(--f3);
+}
+
+h3 {
+  font-size: var(--f4);
+}
+
+h4 {
+  font-size: var(--f5);
+}
+
+h5,
+h6 {
+  font-size: var(--f5);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+h1,
+h2 {
+  margin: var(--sp5) 0 0 0;
+}
+
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: var(--sp4) 0 0 0;
+}
+
+p {
+  font-weight: inherit;
+  font-size: var(--f5);
+}
+
+.column {
+  width: 100%;
+  max-width: var(--colWidth);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--sp3);
+  padding-right: var(--sp3);
+}
+
+.svg-icon {
+  --iconWidth: 1.5em;
+  --iconHeight: 1.5em;
+  width: var(--iconWidth);
+  height: var(--iconHeight);
+  /* fill: currentColor; */
+  flex-shrink: 0;
+}

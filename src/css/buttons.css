@@ -1,0 +1,195 @@
+/* buttons */
+
+/* based on https://moderncss.dev/css-button-styling-guide/ */
+
+@media screen and (-ms-high-contrast: active) {
+  button.button {
+    border: 2px solid currentcolor;
+  }
+}
+
+.button {
+  --buttonPadding: var(--sp2) var(--sp3);
+  --buttonFontSize: var(--f5);
+  --buttonTextColor: white;
+
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: var(--buttonFontSize);
+  text-align: left;
+  line-height: 1.1;
+
+  background-color: var(--colorButton);
+  color: var(--buttonTextColor);
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+
+  transition: 180ms all ease-in-out;
+}
+
+.button.flex-start {
+  justify-content: flex-start;
+}
+
+.button.button:not(.icon-only-button) {
+  /* padding: 0.2em 0.75em; */
+  padding: var(--buttonPadding);
+  min-width: 10ch;
+  min-height: 2.2rem;
+}
+
+.button.button:hover:not(:disabled),
+.button.button:active {
+  background-color: var(--colorButtonHover);
+}
+
+.button.button:focus {
+  outline-style: solid;
+  outline-color: transparent;
+  box-shadow: 0 3px 5px 2px var(--colorButtonHover);
+  /* box-shadow: 0 0 0 4px var(--colorBlueDarker); */
+}
+
+.button:disabled,
+.button[disabled] {
+  opacity: 0.6;
+}
+
+.button.button--green {
+  --colorButton: var(--colorGreen);
+  --colorButtonHover: var(--colorDarkGreen);
+}
+
+.button.button--red {
+  --colorButton: var(--colorTomato);
+  --colorButtonHover: var(--colorDarkTomato);
+}
+
+/* full width button */
+
+.button.button--block {
+  width: 100%;
+}
+
+/* text button */
+
+.button.button--text {
+  --buttonTextColor: var(--colorButton);
+  --buttonFontSize: var(--f6);
+  background-color: transparent;
+  /* color: var(--colorButton); */
+  box-shadow: none;
+  text-transform: uppercase;
+  font-size: var(--buttonFontSize);
+  letter-spacing: 0.8px;
+}
+
+.button.button--text:hover:not(:disabled),
+.button.button--text:active,
+.button.button--text:focus {
+  --colorButtonHover: var(--colorBlueVeryLight);
+  outline: none;
+  box-shadow: none;
+}
+
+a.button-link:hover,
+a.button-link:active,
+a.button-link:focus {
+  /* background-color: var(--colorBlueVeryLight); */
+  outline: none;
+  box-shadow: none;
+  color: var(--colorBlack);
+}
+
+a.button-link:visited {
+  color: var(--colorBlack);
+}
+
+/* align left right */
+.button--text.button--text__left-align {
+  transform: translateX(calc(-1 * var(--buttonPadding)));
+}
+
+.button--text.button--text__right-align {
+  transform: translateX(var(--buttonPadding));
+}
+
+/* small button */
+
+.button.button--small:not(.icon-only-button) {
+  --buttonPadding: var(--sp2);
+  --buttonFontSize: var(--f7);
+  min-height: 2rem;
+}
+
+.button.button--smaller:not(.icon-only-button) {
+  --buttonPadding: var(--sp2);
+  --buttonFontSize: var(--f7);
+  min-height: 2rem;
+}
+
+/* button icon  */
+
+.button:not(.icon-only-button):not(.button--nav) > .svg-icon {
+  margin-right: var(--sp2);
+}
+
+.button.button__icon--end {
+  flex-direction: row-reverse;
+}
+
+.button.button__icon--end .svg-icon {
+  margin-right: 0;
+  margin-left: var(--sp2);
+}
+
+/* icon only button */
+
+.button.icon-only-button {
+  --iconSize: 2.5rem;
+  width: var(--iconSize);
+  height: var(--iconSize);
+  border-radius: 50%;
+  /* padding: 0.35em; */
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.button.icon-only-button.button--small {
+  --iconSize: 1.1rem;
+}
+
+.button.icon-only-button > .svg-icon {
+  width: 100%;
+  height: 100%;
+  /* fill: currentColor; */
+  margin: 0;
+}
+
+/* button nav */
+.topbar.topbar--desktop .button.button--nav {
+  --iconSize: 1.4rem !important;
+}
+.topbar.topbar--mobile .button.button--nav {
+  --iconSize: 2rem !important;
+}
+
+.button.button--nav {
+  text-transform: none;
+  letter-spacing: initial;
+  padding: 0 !important;
+  min-height: var(--iconSize) !important;
+  min-width: initial !important;
+}
+
+.button.button--nav > .svg-icon {
+  width: var(--iconSize);
+  height: var(--iconSize);
+}
