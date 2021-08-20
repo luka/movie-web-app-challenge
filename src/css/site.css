@@ -5,7 +5,7 @@ body {
   font-weight: var(--baseFontWeight);
   scroll-behavior: var(--scroll-behavior);
   color: var(--colorBlack);
-  padding-bottom: var(--sp5);
+  /* padding-bottom: var(--sp5); */
 }
 
 @media screen and (min-width: 769px) {
@@ -118,4 +118,33 @@ p {
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -124;
   }
+}
+
+.search-bar {
+  margin-bottom: var(--sp3);
+}
+
+.movie-list a {
+  text-decoration: none;
+  color: var(--colorBlack);
+}
+
+.movie-list a > div {
+  padding: var(--sp3) 0;
+}
+
+.movie-list a:hover > div {
+  background-color: var(--colorBlueVeryLight);
+}
+
+.movie-poster {
+  flex-shrink: 0;
+}
+
+.movie-details {
+  padding-bottom: var(--sp5);
+}
+
+.autosizer > div {
+  padding-bottom: var(--sp5);
 }

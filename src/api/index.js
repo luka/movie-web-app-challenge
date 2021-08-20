@@ -13,6 +13,10 @@ async function apiCall(params) {
   return data;
 }
 
-export function apiGetMovies(query) {
-  return apiCall(`&type=movie&s=${query}`);
+export function apiGetMovies(query, page) {
+  return apiCall(`&type=movie&s=${query}&page=${page}`);
+}
+
+export function apiGetMovieDetails(id) {
+  return apiCall(`&i=${id}`);
 }
