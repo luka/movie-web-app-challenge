@@ -1,15 +1,12 @@
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchMovies,
-  selectMoviesStatus,
-  selectSearchQuery,
-  setSearchQuery,
-} from "../features";
+import { fetchMovies, selectMoviesStatus, setSearchQuery } from "../features";
+import { ErrorBox } from "./ErrorBox";
 import { SpinnerBox } from "./SpnnerBox";
 
 export function SearchBar() {
-  const { loading, error, data } = useSelector(selectMoviesStatus);
-  const query = useSelector(selectSearchQuery);
+  const { loading, error, data, query } = useSelector(selectMoviesStatus);
+  const ref = useRef();
   const dispatch = useDispatch();
   return (
     <div className="search-bar mt4">
@@ -18,22 +15,25 @@ export function SearchBar() {
         <input
           type="text"
           className="w-50"
-          value={query}
-          onChange={({ target }) => dispatch(setSearchQuery(target.value))}
+          defaultValue={query}
+          ref={ref}
         ></input>
         <button
           type="submit"
           className="di"
           onClick={(e) => {
             e.preventDefault();
-            dispatch(fetchMovies());
+            if (ref.current.value.length > 0) {
+              dispatch(setSearchQuery(ref.current.value));
+              dispatch(fetchMovies());
+            }
           }}
         >
           Search
         </button>
       </form>
-      {error && <p>{error}</p>}
-      {loading && !data && <SpinnerBox className="db center mt4" />}
+      {error && <ErrorBox error={error} />}
+      {loading && !data && <SpinnerBox />}
     </div>
   );
 }

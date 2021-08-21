@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { useMakeSelector } from "../../utils/hooks";
 import { emptyObj } from "../../utils/toolkit";
+import { ErrorBox } from "../components/ErrorBox";
 import { MovieInfo } from "../components/MovieInfo";
 import { MoviePoster } from "../components/MoviePoster";
 import { SpinnerBox } from "../components/SpnnerBox";
@@ -14,7 +15,7 @@ import {
 } from "../features";
 
 export function MovieDetails() {
-  const { loading = true } = useSelector(selectDetailsStatus);
+  const { loading = true, error } = useSelector(selectDetailsStatus);
   const {
     params: { movieId },
   } = useRouteMatch();
@@ -50,6 +51,7 @@ export function MovieDetails() {
           <MovieInfo data={movieData} />
         </div>
       )}
+      {error && <ErrorBox error={error} />}
       {loading && <SpinnerBox />}
     </div>
   );

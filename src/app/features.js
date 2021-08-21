@@ -4,11 +4,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import { apiGetMovieDetails, apiGetMovies } from "../api";
-import {
-  asyncThunkReducers,
-  fetchError,
-  fetchStart,
-} from "../utils/asyncThunk";
+import { fetchError, fetchStart } from "../utils/asyncThunk";
 import { findBy, makePagination } from "../utils/toolkit";
 
 //
@@ -18,17 +14,10 @@ export const fetchMovies = createAsyncThunk(
   "movies/fetchStatus",
   async function asyncThunk(page = 1, thunkApi) {
     try {
-      const {
-        movies: { query, data },
-      } = thunkApi.getState();
-      if (query.length > 0) {
-        // only fetch when sth typed
-        const { totalResults, Search: items } = await apiGetMovies(query, page);
-        return {
-          items: page > 1 ? (data.items || []).concat(items) : items,
-          pagination: makePagination(Number(totalResults), page),
-        };
-      }
+      const { movies } = thunkApi.getState();
+      const { query } = movies;
+      const { totalResults, Search: items } = await apiGetMovies(query, page);
+      return { items, page, totalResults };
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -41,9 +30,25 @@ const moviesSlice = createSlice({
   reducers: {
     setSearchQuery(state, { payload }) {
       state.query = payload;
+      state.data = undefined;
     },
   },
-  extraReducers: asyncThunkReducers(fetchMovies),
+  extraReducers: {
+    [fetchMovies.pending]: fetchStart,
+    [fetchMovies.rejected]: fetchError,
+    [fetchMovies.fulfilled]: (state, { payload }) => {
+      const { totalResults, items, page } = payload;
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: {
+          items: page > 1 ? (state.data?.items || []).concat(items) : items,
+          pagination: makePagination(Number(totalResults), page),
+        },
+      };
+    },
+  },
 });
 
 export const moviesReducer = moviesSlice.reducer;
@@ -90,12 +95,11 @@ export const fetchMovieDetails = createAsyncThunk(
 
 const moviesDetailsSlice = createSlice({
   name: "moviesDetails",
-  initialState: { selected: null },
+  initialState: {},
   extraReducers: {
     [fetchMovieDetails.pending]: fetchStart,
     [fetchMovieDetails.rejected]: fetchError,
-    [fetchMovieDetails.fulfilled]: (state, action) => {
-      const { payload } = action;
+    [fetchMovieDetails.fulfilled]: (state, { payload }) => {
       return {
         loading: false,
         error: null,

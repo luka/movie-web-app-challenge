@@ -21,21 +21,3 @@ export function fetchError(state, action) {
     error: action.payload,
   };
 }
-
-export function asyncThunkReducers(thunk) {
-  return {
-    [thunk.pending]: fetchStart,
-    [thunk.fulfilled]: fetchSuccess,
-    [thunk.rejected]: fetchError,
-  };
-}
-
-export function tryAsync(apiFn) {
-  return async function asyncThunk(data, thunkApi) {
-    try {
-      return await apiFn(data, thunkApi);
-    } catch (error) {
-      return thunkApi.rejectWithValue(error);
-    }
-  };
-}
