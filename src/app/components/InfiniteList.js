@@ -8,7 +8,7 @@ import { SearchBar } from "./SearchBar";
 import { InfiniteListRow } from "./InfiniteListRow";
 
 export function InfiniteList() {
-  const { loading, data = {} } = useSelector(selectMoviesStatus);
+  const { loading, error, data = {} } = useSelector(selectMoviesStatus);
   const { items = [], pagination = {} } = data;
   const { next_page } = pagination;
   // items.length + 1 because we have title row
@@ -32,6 +32,7 @@ export function InfiniteList() {
                 items,
                 Header: SearchBar,
                 hasNext: !!next_page,
+                error,
               }}
               height={height}
               itemCount={itemCount}

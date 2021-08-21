@@ -16,7 +16,6 @@ export function fetchSuccess(state, action) {
 export function fetchError(state, action) {
   return {
     ...state,
-    data: undefined,
     loading: false,
     error: action.payload,
   };
