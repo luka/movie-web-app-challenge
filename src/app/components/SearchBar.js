@@ -21,10 +21,12 @@ export function SearchBar() {
         <button
           type="submit"
           className="di"
+          disabled={loading}
           onClick={(e) => {
             e.preventDefault();
-            if (ref.current.value.length > 0) {
-              dispatch(setSearchQuery(ref.current.value));
+            const { value } = ref.current;
+            if (value.length > 0) {
+              dispatch(setSearchQuery(value));
               dispatch(fetchMovies());
             }
           }}
